@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup";
+option java_outer_classname = "PropostaGrpc";
+option objc_class_prefix = "HLW";
+
+package br.com.zup;
+
+service PropostaGrpcService {
+  rpc cadastrar (PropostaRequest) returns (PropostaResponse) {}
+}
+
+message PropostaRequest {
+  string documento = 1;
+  string email = 2;
+  string nome = 3;
+  string endereco = 4;
+  string salario = 5;
+}
+
+message PropostaResponse {
+  string id = 1;
+}
