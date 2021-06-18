@@ -9,15 +9,15 @@ import javax.inject.Singleton
 import javax.validation.Validator
 
 @Singleton
-class PropostaClient(@Inject val validator: Validator, val repository: PropostaRepository) :
+class PropostaClient(@Inject val validator: Validator, @Inject val service: PropostaService) :
     PropostaGrpcServiceGrpc.PropostaGrpcServiceImplBase() {
 
     override fun cadastrar(request: PropostaRequest, responseObserver: StreamObserver<PropostaResponse>) {
-        val proposta = request.toModel(validator)
+        val nova = request.toModel(validator)
 
-        repository.save(proposta)
+        service.registrar(nova)
 
-        responseObserver.onNext(PropostaResponse.newBuilder().setId(proposta.id.toString()).build())
+        responseObserver.onNext(PropostaResponse.newBuilder().setId(nova.id.toString()).build())
         responseObserver.onCompleted()
     }
 

@@ -10,3 +10,9 @@ datasources:
     schema-generate: CREATE_DROP
     dialect: MYSQL
 jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+url:
+  solicitacao: ${URL_SOLICITACAO:`http://localhost:9999/api`}
+feign:
+  url:
+    cartao=${URL_CARTAO:`http://localhost:8888/api`}
