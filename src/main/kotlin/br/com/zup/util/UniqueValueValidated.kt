@@ -4,13 +4,14 @@ import org.hibernate.SessionFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
 import javax.persistence.Query
 import javax.validation.ConstraintValidator
 import javax.validation.ConstraintValidatorContext
 import kotlin.reflect.KClass
 
 @Singleton
-open class UniqueValueValidated(@Inject val entityManager: EntityManager, @Inject val sessionFactory: SessionFactory) :
+open class UniqueValueValidated(@PersistenceContext val entityManager: EntityManager, @Inject val sessionFactory: SessionFactory) :
     ConstraintValidator<UniqueValue, String> {
 
     lateinit var field: String

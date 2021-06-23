@@ -9,8 +9,41 @@ package br.com.zup;
 
 service PropostaGrpcService {
   rpc cadastrar (PropostaRequest) returns (PropostaResponse) {}
+
+  rpc consultar(ConsultarPropostaRequest) returns (ConsultarPropostaResponse) {}
 }
 
+service BiometriaGrpcService {
+  rpc cadastrar (BiometriaRequest) returns (BiometriaResponse) {}
+}
+
+service CartaoGrpcService {
+  rpc bloquear (BloqueioRequest) returns (BloqueioResponse) {}
+
+  rpc avisoViagem (ViagemRequest) returns (ViagemResponse) {}
+}
+
+// Aviso Viagem
+message ViagemRequest {
+  string idCartao = 1;
+  string validoAte = 2;
+  string destino = 3;
+}
+
+message ViagemResponse {
+  int64 id = 1;
+}
+
+// Bloquear Cartao
+message BloqueioRequest {
+  string idCartao = 1;
+}
+
+message BloqueioResponse {
+  int64 id = 1;
+}
+
+// Cadastrar Proposta
 message PropostaRequest {
   string documento = 1;
   string email = 2;
@@ -21,4 +54,29 @@ message PropostaRequest {
 
 message PropostaResponse {
   string id = 1;
+}
+
+// Consultar Proposta
+message ConsultarPropostaRequest {
+  int64 id = 1;
+}
+
+message ConsultarPropostaResponse {
+  int64 id = 1;
+  string documento = 2;
+  string email = 3;
+  string endereco = 4;
+  string nome = 5;
+  string salario = 6;
+  string status = 7;
+}
+
+// Cadastrar Biometria
+message BiometriaRequest {
+  string idCartao = 1;
+  string biometria = 2;
+}
+
+message BiometriaResponse {
+  int64 id = 1;
 }

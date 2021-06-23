@@ -1,6 +1,7 @@
 package br.com.zup.proposta
 
 import br.com.zup.PropostaRequest
+import br.com.zup.proposta.model.Proposta
 import java.math.BigDecimal
 import javax.validation.ConstraintViolationException
 import javax.validation.Validator

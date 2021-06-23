@@ -1,6 +1,6 @@
-package br.com.zup.proposta
+package br.com.zup.proposta.model
 
-import br.com.zup.cartao.Cartao
+import br.com.zup.cartao.model.Cartao
 import br.com.zup.client.proposta.ResultaAnalise
 import br.com.zup.client.proposta.TipoResultadoSolicitacao
 import br.com.zup.util.CPFouCNPJ
@@ -13,14 +13,8 @@ import javax.validation.constraints.Positive
 
 @Entity
 class Proposta(
-    @field:NotBlank @field:CPFouCNPJ
-    @field:UniqueValue(domainClass = Proposta::class, fieldName = "documento")
-    val documento: String,
-
-    @field:NotBlank @field:Email
-    @field:UniqueValue(domainClass = Proposta::class, fieldName = "email", message = "Email ja existe")
-    val email: String,
-
+    @field:NotBlank @field:CPFouCNPJ val documento: String,
+    @field:NotBlank @field:Email val email: String,
     @field:NotBlank val nome: String,
     @field:NotBlank val endereco: String,
     @field:Positive val salario: BigDecimal
@@ -37,11 +31,7 @@ class Proposta(
     var cartao: Cartao? = null
 
     fun analisarProposta(resultado: ResultaAnalise) {
-        if (TipoResultadoSolicitacao.COM_RESTRICAO.equals(resultado.resultadoSolicitacao)) {
-            statusSolicitacao = StatusSolicitacao.NAO_ELEGIVEL
-        } else {
-            statusSolicitacao = StatusSolicitacao.ELEGIVEL
-        }
+        statusSolicitacao = StatusSolicitacao.ELEGIVEL
     }
 
 }

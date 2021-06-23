@@ -1,4 +1,4 @@
-package br.com.zup.cartao
+package br.com.zup.cartao.model
 
 enum class Status {
     ATIVO, BLOQUEADO

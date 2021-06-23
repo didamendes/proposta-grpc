@@ -2,11 +2,16 @@ package br.com.zup.proposta
 
 import br.com.zup.client.proposta.PropostaClient
 import br.com.zup.client.proposta.SolicitacaoAnalise
+import br.com.zup.proposta.model.Proposta
+import br.com.zup.proposta.model.StatusSolicitacao
+import br.com.zup.shared.exception.PropostaNaoEncontradaException
 import io.micronaut.validation.Validated
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.transaction.Transactional
 import javax.validation.Valid
+import javax.validation.constraints.NotNull
 
 @Validated
 @Singleton
@@ -22,9 +27,19 @@ class PropostaService(@Inject val repository: PropostaRepository, @Inject val cl
             idProposta = proposta.id.toString()
         )
 
-        var resultado = client.resultado(solicitacaoAnalise)
+        try {
+            var resultado = client.resultado(solicitacaoAnalise)
+            proposta.analisarProposta(resultado)
+        } catch (e: Exception) {
+            proposta.also { it.statusSolicitacao = StatusSolicitacao.NAO_ELEGIVEL }
+        }
 
-        proposta.analisarProposta(resultado)
+        return proposta
+    }
+
+    @Transactional
+    fun consultarPorId(@NotNull id: Long): Proposta {
+        val proposta = repository.findById(id).orElseThrow {throw PropostaNaoEncontradaException("Proposta nao encontrado") }
 
         return proposta
     }

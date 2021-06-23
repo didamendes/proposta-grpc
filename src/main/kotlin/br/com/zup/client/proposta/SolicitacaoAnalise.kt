@@ -1,6 +1,6 @@
 package br.com.zup.client.proposta
 
-class SolicitacaoAnalise(
+data class SolicitacaoAnalise(
     var documento: String?,
     var nome: String?,
     var idProposta: String?
