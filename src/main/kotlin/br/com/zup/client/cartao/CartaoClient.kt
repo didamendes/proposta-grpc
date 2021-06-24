@@ -1,8 +1,10 @@
 package br.com.zup.client.cartao
 
 import br.com.zup.cartao.model.Cartao
+import br.com.zup.client.cartao.model.ResultadoCarteira
 import br.com.zup.client.cartao.model.SolicitacaoAvisoViagem
 import br.com.zup.client.cartao.model.SolicitacaoBloqueio
+import br.com.zup.client.cartao.model.SolicitacaoInclusaoCarteira
 import io.micronaut.http.annotation.*
 import io.micronaut.http.client.annotation.Client
 
@@ -17,5 +19,8 @@ interface CartaoClient {
 
     @Post(uri = "/cartoes/{id}/avisos")
     fun avisoViagem(@PathVariable("id") id: String, @Body solicitacaoAvisoViagem: SolicitacaoAvisoViagem)
+
+    @Post(uri = "/cartoes/{id}/carteiras")
+    fun associar(@PathVariable("id") id: String, @Body solicitacaoInclusaoCarteira: SolicitacaoInclusaoCarteira): ResultadoCarteira
 
 }

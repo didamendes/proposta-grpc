@@ -11,7 +11,10 @@ import javax.validation.ConstraintValidatorContext
 import kotlin.reflect.KClass
 
 @Singleton
-open class UniqueValueValidated(@PersistenceContext val entityManager: EntityManager, @Inject val sessionFactory: SessionFactory) :
+open class UniqueValueValidated(
+    @PersistenceContext val entityManager: EntityManager,
+    @Inject val sessionFactory: SessionFactory
+) :
     ConstraintValidator<UniqueValue, String> {
 
     lateinit var field: String

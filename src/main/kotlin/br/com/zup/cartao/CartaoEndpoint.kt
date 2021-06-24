@@ -27,4 +27,14 @@ class CartaoEndpoint(
         responseObserver.onCompleted()
     }
 
+    override fun associarCarteira(
+        request: AssociarCarteiraRequest,
+        responseObserver: StreamObserver<AssociarCarteiraResponse>
+    ) {
+        val associar = cartaoService.associar(request)
+
+        responseObserver.onNext(AssociarCarteiraResponse.newBuilder().setId(associar.id!!).build())
+        responseObserver.onCompleted()
+    }
+
 }

@@ -2,6 +2,7 @@ package br.com.zup.shared.interceptors
 
 import br.com.zup.shared.exception.CartaoJaBloqueadoException
 import br.com.zup.shared.exception.CartaoNaoEncontradaException
+import br.com.zup.shared.exception.CarteiraExistenteException
 import br.com.zup.shared.exception.PropostaNaoEncontradaException
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
@@ -28,6 +29,7 @@ class ErrorInterceptor : MethodInterceptor<Any, Any> {
                 is PropostaNaoEncontradaException -> Status.NOT_FOUND.withCause(e).withDescription(e.message)
                 is CartaoNaoEncontradaException -> Status.NOT_FOUND.withCause(e).withDescription(e.message)
                 is CartaoJaBloqueadoException -> Status.INVALID_ARGUMENT.withCause(e).withDescription(e.message)
+                is CarteiraExistenteException -> Status.INVALID_ARGUMENT.withCause(e).withDescription(e.message)
 
                 else -> Status.UNKNOWN.withCause(e).withDescription("üm erro inesperado aconteceu")
             }

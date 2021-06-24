@@ -21,6 +21,25 @@ service CartaoGrpcService {
   rpc bloquear (BloqueioRequest) returns (BloqueioResponse) {}
 
   rpc avisoViagem (ViagemRequest) returns (ViagemResponse) {}
+
+  rpc associarCarteira (AssociarCarteiraRequest) returns (AssociarCarteiraResponse) {}
+}
+
+// Associar Carteira
+message AssociarCarteiraRequest {
+  string idCartao = 1;
+  string email = 2;
+  Tipo tipo = 3;
+}
+
+message AssociarCarteiraResponse {
+  int64 id = 1;
+}
+
+enum Tipo {
+  INVALIDO = 0;
+  PAYPAL = 1;
+  SAMSUNG_PAY = 2;
 }
 
 // Aviso Viagem
