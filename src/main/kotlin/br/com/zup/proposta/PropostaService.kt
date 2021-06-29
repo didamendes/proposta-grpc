@@ -29,7 +29,7 @@ class PropostaService(@Inject val repository: PropostaRepository, @Inject val cl
 
         try {
             var resultado = client.resultado(solicitacaoAnalise)
-            proposta.analisarProposta(resultado)
+            proposta.analisarProposta(resultado.body())
         } catch (e: Exception) {
             proposta.also { it.statusSolicitacao = StatusSolicitacao.NAO_ELEGIVEL }
         }

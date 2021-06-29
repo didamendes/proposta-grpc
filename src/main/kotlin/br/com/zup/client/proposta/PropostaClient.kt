@@ -1,5 +1,6 @@
 package br.com.zup.client.proposta
 
+import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.annotation.Client
@@ -8,6 +9,6 @@ import io.micronaut.http.client.annotation.Client
 interface PropostaClient {
 
     @Post(uri = "/solicitacao")
-    fun resultado(@Body solicitacaoAnalise: SolicitacaoAnalise): ResultaAnalise
+    fun resultado(@Body solicitacaoAnalise: SolicitacaoAnalise): HttpResponse<ResultaAnalise>
 
 }
